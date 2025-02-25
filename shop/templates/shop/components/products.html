@@ -1,0 +1,10 @@
+<section class="products-section products_section-watches">
+    <h2 class="main_title text-center">{{category.title|title}} Collections</h2>
+    <div class="container">
+        <div class="row">
+            {% for product in category.products %}
+            {% include 'shop/components/card.html' %}
+            {% endfor %}
+        </div>
+    </div>
+</section>

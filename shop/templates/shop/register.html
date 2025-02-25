@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block header_poster %}
+{% endblock header_poster %}
+
+{% block main%}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-6">
+                <div class="ps-lg-5">
+                    <div class="card shadow-lg border border-primary text-white text-left h-100">
+                        <div class="card-body bg-dark p-4 p-xl-5">
+                            <h2 class="pb-3 text-center">Register</h2>
+                            <form method="post" action="{% url 'signup' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label class="form-label">Username</label>
+                                    {{ register_form.username }}
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">E-Mail</label>
+                                    {{ register_form.email }}
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password</label>
+                                    {{ register_form.password1 }}
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password (repeat)</label>
+                                    {{ register_form.password2 }}
+                                </div>
+                                <button class="btn btn-success btn-lg" type="submit">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock main %}

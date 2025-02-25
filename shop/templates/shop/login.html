@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block header_poster %}
+{% endblock header_poster %}
+
+{% block main%}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-6">
+                <div class="ps-lg-5">
+                    <div class="card shadow-lg border border-primary text-white text-left h-100">
+                        <div class="card-body bg-dark p-4 p-xl-5">
+                            <h2 class="pb-3 text-center">User Login</h2>
+                            <form method="post" action="" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label class="form-label">Username</label>
+                                    {{ login_form.username }}
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password</label>
+                                    {{ login_form.password }}
+                                </div>
+                                <div class="mb-3 d-flex flex-column justify-content-center align-items-center">
+                                    <button class="btn btn-danger btn-lg" type="submit">Login</button>
+                                    <hr width="100%" color="yellow" size="5px"/>
+                                    <a class="btn btn-primary btn-lg" href="{% url 'register' %}">Create Account</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock main %}
