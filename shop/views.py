@@ -1,3 +1,4 @@
+from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from shop.forms import LoginForm, RegisterForm
@@ -84,3 +85,17 @@ def signup(request):
         for error in form.errors:
             messages.error(request, form.errors[error].as_text())
         return redirect("register")
+
+def signin(request):
+    form = LoginForm(data=request.POST)
+    if form.is_valid():
+        user = form.get_user()
+        login(request, user)
+        return redirect("index")
+    else:
+        messages.error(request, "Invalid username/password")
+        return redirect("login")
+
+def user_logout(request):
+    logout(request)
+    return redirect("login")
