@@ -99,3 +99,16 @@ def signin(request):
 def user_logout(request):
     logout(request)
     return redirect("login")
+
+def user_like(request, slug):
+    user = request.user if request.user.is_authenticated else None
+    product = Product.objects.get(slug=slug)
+    if user:
+        user_products = Like.objects.filter(user=user)
+        if product in [i.product for i in user_products]:
+            like_product = Like.objects.get(user=user, product=product)
+            like_product.delete()
+        else:
+            Like.objects.create(user=user, product=product)
+    next_page = request.META.get("HTTP_REFERER", "index")
+    return redirect(next_page)

@@ -22,3 +22,4 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [GalleryAdmin]
 
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Like)

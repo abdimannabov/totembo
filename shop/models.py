@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
@@ -28,6 +29,9 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete = models.CASCADE, verbose_name="Product Category", related_name="products")
     slug = models.SlugField(unique=True)
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
@@ -51,3 +55,10 @@ class Gallery(models.Model):
     class Meta:
         verbose_name = "Photo"
         verbose_name_plural = "Photos"
+
+class Like(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Product")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="User")
+
+    def __str__(self):
+        return f"{self.user.username} - {self.product.title}"
