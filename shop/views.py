@@ -112,3 +112,14 @@ def user_like(request, slug):
             Like.objects.create(user=user, product=product)
     next_page = request.META.get("HTTP_REFERER", "index")
     return redirect(next_page)
+
+class LikeList(ListView):
+    model = Like
+    template_name = "shop/likes.html"
+    context_object_name = "products"
+
+    def get_queryset(self):
+        user = self.request.user
+        likes = Like.objects.filter(user=user)
+        products = [i.product for i in likes]
+        return products

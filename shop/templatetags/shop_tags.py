@@ -1,5 +1,5 @@
 from django import template
-from shop.models import Category
+from shop.models import Category, Like
 
 register = template.Library()
 
@@ -40,3 +40,9 @@ def get_filter():
         }
     ]
     return filters
+
+@register.simple_tag()
+def get_like(user):
+    likes = Like.objects.filter(user=user)
+    products = [i.product for i in likes]
+    return products

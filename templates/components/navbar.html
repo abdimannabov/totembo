@@ -11,7 +11,7 @@
             <div class="col-sm-8 col-lx-8 m-auto">
                 <ul class="header_nav-menu d-flex justify-content-center flex-wrap text-center">
                     {% for category in categories %}
-                    <li class="header_nav-item"><a class="header_nav-link " href="{{ category.get_absolute_url }}">{{ category.title | upper}}</a></li>
+                    <li class="header_nav-item"><a class="header_nav-link " href="{{ category.get_absolute_url }}">{{category.title | upper}}</a></li>
                     {% endfor %}
                     <li class="header_nav-item mt-3 mt-lg-0"><a class="header_nav-link " href="">CONTACT</a>
                     </li>
@@ -32,7 +32,13 @@
             <img src="{% static 'images/icons/search_icon.svg' %}" alt="">
         </div>
         <div class="header_panel-item">
-            <img src="{% static 'images/icons/basket_icon.svg' %}" alt="">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'like_list' %}">
+                <img src="{% static 'images/icons/basket_icon.svg' %}" alt="">
+            </a>
+            {% else %}
+            <a href="{% url 'login' %}"><img src="{% static 'images/icons/basket_icon.svg' %}" alt=""></a>
+            {% endif %}
         </div>
         <div class="header_panel-item">
             <img src="{% static 'images/icons/ru_lang_icon.svg' %}" alt="">
@@ -53,8 +59,9 @@
                 <div>
                     <ul>
                         <li>
-                            <a class="header_nav-link" href=""><img src="{% static 'images/icons/basket_icon.svg' %}"
-                                                                    alt=""></a>
+                            <a class="header_nav-link" href="{% url 'like_list' %}"><img
+                                    src="{% static 'images/icons/basket_icon.svg' %}"
+                                    alt=""></a>
                             <a class="header_nav-link" href=""><img src="{% static 'images/icons/ru_lang_icon.svg' %}"
                                                                     alt=""></a>
                         </li>

@@ -10,5 +10,6 @@ urlpatterns = [
     path("signup/", signup, name="signup"),
     path("signin/", signin, name="signin"),
     path("logout/", user_logout, name="logout"),
-    path("user_like/<slug:slug>/", user_like, name="user_like")
+    path("user_like/<slug:slug>/", user_like, name="user_like"),
+    path("like_list/", LikeList.as_view(), name="like_list")
 ]
