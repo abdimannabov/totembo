@@ -3,9 +3,15 @@ from shop.models import *
 
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'image']
+    list_display = ['id', 'title', 'get_count']
     list_display_links = ['id', 'title']
     prepopulated_fields = {'slug':('title',)}
+    def get_count(self, obj):
+        if obj.products:
+            return str(len(obj.products.all()))
+        else:
+            return "0"
+    get_count.short_description = "Product Count"
 
 admin.site.register(Category, CategoryAdmin)
 
@@ -23,3 +29,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Like)
+admin.site.register(Customer)
+admin.site.register(Order)
+admin.site.register(OrderProduct)
+admin.site.register(ShippingAddress)
