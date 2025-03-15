@@ -42,6 +42,10 @@
                 <p class="product_card-price">${{ product.price }}</p>
             </div>
         </a>
+        {% if product.quantity > 0 %}
         <a href="{% url 'product' product.slug %}" class="product_card-btn">BUY</a>
+        {% else %}
+        <button disabled class="product_card-btn">NONE</button>
+        {% endif %}
     </div>
 </div>

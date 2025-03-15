@@ -82,7 +82,7 @@ class Order(models.Model):
     @property
     def get_cart_total_price(self):
         order_products = self.orderproduct_set.all()
-        total_price = sum(product.get_total_price for product in order_products)
+        total_price = sum([product.get_total_price for product in order_products])
         return total_price
 
     @property
@@ -96,6 +96,7 @@ class Order(models.Model):
     class Meta:
         verbose_name = "Order"
         verbose_name_plural = "Orders"
+
 class OrderProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
@@ -112,6 +113,7 @@ class OrderProduct(models.Model):
     class Meta:
         verbose_name = "Order Product"
         verbose_name_plural = "Order Products"
+
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
